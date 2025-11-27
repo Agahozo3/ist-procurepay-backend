@@ -38,7 +38,7 @@ AUTH_USER_MODEL = 'core.User'
 # CORS
 # ------------------------------
 CORS_ALLOWED_ORIGINS = os.environ.get(
-    "CORS_ALLOWED_ORIGINS", "http://localhost:5173"
+    "CORS_ALLOWED_ORIGINS", "https://ist-procurepay-frontend.vercel.app"
 ).split(",")
 
 # ------------------------------
