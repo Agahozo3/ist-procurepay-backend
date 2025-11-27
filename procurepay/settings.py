@@ -2,21 +2,21 @@ from pathlib import Path
 import os
 import dj_database_url
 
-# ------------------------------
-# Build paths inside the project
-# ------------------------------
+# ---------------------------------------------------------
+# BASE DIRECTORY
+# ---------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ------------------------------
+# ---------------------------------------------------------
 # SECURITY SETTINGS
-# ------------------------------
+# ---------------------------------------------------------
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-default-secret-for-dev")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
-# ------------------------------
-# Application definition
-# ------------------------------
+# ---------------------------------------------------------
+# INSTALLED APPS
+# ---------------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,25 +29,27 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+
     'core',
 ]
 
 AUTH_USER_MODEL = 'core.User'
 
-# ------------------------------
+# ---------------------------------------------------------
 # CORS
-# ------------------------------
+# ---------------------------------------------------------
 CORS_ALLOWED_ORIGINS = os.environ.get(
-    "CORS_ALLOWED_ORIGINS", "https://ist-procurepay-frontend.vercel.app"
+    "CORS_ALLOWED_ORIGINS",
+    "https://ist-procurepay-frontend.vercel.app"
 ).split(",")
 
-# ------------------------------
-# Middleware
-# ------------------------------
+# ---------------------------------------------------------
+# MIDDLEWARE
+# ---------------------------------------------------------
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',  
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -57,6 +59,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'procurepay.urls'
 
+# ---------------------------------------------------------
+# TEMPLATES
+# ---------------------------------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -65,9 +70,9 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',  
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',  
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -75,18 +80,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'procurepay.wsgi.application'
 
-# ------------------------------
-# Database - Use DATABASE_URL from environment
-# ------------------------------
+# ---------------------------------------------------------
+# DATABASE (Render PostgreSQL)
+# ---------------------------------------------------------
 DATABASES = {
     "default": dj_database_url.config(
         default=os.environ.get("DATABASE_URL")
     )
 }
 
-# ------------------------------
-# Password validation
-# ------------------------------
+# ---------------------------------------------------------
+# PASSWORD VALIDATION
+# ---------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -94,32 +99,34 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# ------------------------------
-# Internationalization
-# ------------------------------
+# ---------------------------------------------------------
+# INTERNATIONALIZATION
+# ---------------------------------------------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# ------------------------------
-# Static & Media files
-# ------------------------------
+# ---------------------------------------------------------
+# STATIC & MEDIA FILES
+# ---------------------------------------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# ------------------------------
-# Default primary key field type
-# ------------------------------
+# ---------------------------------------------------------
+# DEFAULT PRIMARY KEY FIELD TYPE
+# ---------------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ------------------------------
-# Django REST Framework
-# ------------------------------
+# ---------------------------------------------------------
+# REST FRAMEWORK
+# ---------------------------------------------------------
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -130,9 +137,9 @@ REST_FRAMEWORK = {
     ),
 }
 
-# ------------------------------
-# Optional: Logging
-# ------------------------------
+# ---------------------------------------------------------
+# LOGGING (PRODUCTION ONLY)
+# ---------------------------------------------------------
 if not DEBUG:
     LOGGING = {
         'version': 1,
