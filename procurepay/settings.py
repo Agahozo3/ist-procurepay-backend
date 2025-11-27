@@ -7,9 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bgo%dup9*k4#0m(!kr9w=m^u7hv8^q9j!gh=n*g^923k#@@3i_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []  # for development, keep empty or add host names for production
+ALLOWED_HOSTS = ["ist-procurepay-backend.onrender.com"]
+
 
 
 # Application definition
