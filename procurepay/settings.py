@@ -9,7 +9,8 @@ SECRET_KEY = 'django-insecure-bgo%dup9*k4#0m(!kr9w=m^u7hv8^q9j!gh=n*g^923k#@@3i_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["ist-procurepay-backend.onrender.com"]
+ALLOWED_HOSTS = ["ist-procurepay-backend-1.onrender.com"]
+
 
 
 
