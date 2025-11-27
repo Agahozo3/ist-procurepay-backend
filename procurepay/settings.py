@@ -1,17 +1,16 @@
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-fallback-key")
+SECRET_KEY = 'django-insecure-bgo%dup9*k4#0m(!kr9w=m^u7hv8^q9j!gh=n*g^923k#@@3i_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# Replace with your Render URL when deployed
-ALLOWED_HOSTS = ["your-app.onrender.com"]
+ALLOWED_HOSTS = []  # for development, keep empty or add host names for production
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -26,14 +25,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'core',  # your app
+    'core',  
 ]
 
 AUTH_USER_MODEL = 'core.User' 
 
-# CORS for frontend
 CORS_ALLOWED_ORIGINS = [
-    "https://your-frontend.onrender.com",  # replace with your frontend URL
+    "http://localhost:5173",
 ]
 
 MIDDLEWARE = [
@@ -52,7 +50,7 @@ ROOT_URLCONF = 'procurepay.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [],  # add paths to your templates if needed
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,26 +66,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'procurepay.wsgi.application'
 
 
-# Database - use Render PostgreSQL credentials
+# Database - PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
-        'HOST': os.environ.get("DB_HOST"),
-        'PORT': os.environ.get("DB_PORT", "5432"),
+        'NAME': 'procurepay',        
+        'USER': 'postgres',           
+        'PASSWORD': 'mypostgres123',  
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
+
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
@@ -95,19 +102,23 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# Media files
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'          # required for staticfiles
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # for collectstatic in production
+STATICFILES_DIRS = [
+    BASE_DIR / "static",         # optional: extra static files
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Django REST Framework settings
+
+# Django REST Framework settings (optional)
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
